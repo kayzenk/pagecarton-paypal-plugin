@@ -48,8 +48,9 @@ class Paypal_Pay extends Paypal_Paypal
 		//	var_export( $parameters );
 		$parameters['email'] = Ayoola_Form::getGlobalValue( 'email' ) ? : ( Ayoola_Form::getGlobalValue( 'email_address' ) ? : Ayoola_Application::getUserInfo( 'email' ) );
 		$parameters['reference'] = $this->getParameter( 'reference' ) ? : $parameters['order_number'];
-		$parameters['client_id'] = Paypal_Settings::retrieve( 'client_id' ) ? : 'ASD5Em1h1fmMoSM-LI8LiKz0Qu7STNfRSYRZYr6v_F3klJwXyrF9N_0BQJvs59bQrZyXX5bWm33MsdeJ'; 
+		$parameters['client_id'] = Paypal_Settings::retrieve( 'client_id' ) ? : null; 
 		$parameters['currency'] = Paypal_Settings::retrieve( 'currency' ) ? : 'USD';
+		if ( is_null( $parameters['client_id'] ) ) { return; }
 		$counter = 1;
 		$parameters['price'] = 0.00;
 		foreach( $values as $name => $value )
